@@ -73,7 +73,7 @@ my_function(fname="Tobias", lname="Refsnes")
 
 
 def tri_recursion(k):
-    if (k > 0):
+    if k > 0:
         result = k + tri_recursion(k - 1)
         print(result)
     else:
@@ -86,8 +86,8 @@ tri_recursion(6)
 
 
 def recursion(number):
-    if (number > 0):
-        result = number+recursion(number-1)
+    if number > 0:
+        result = number + recursion(number - 1)
         print(result)
     else:
         result = 0
@@ -154,8 +154,13 @@ class Student(Human):
         self.graduationyear = year
 
     def welcome(self):
-        print("Welcome", self.firstname, self.lastname,
-              "to the class of", self.graduationyear)
+        print(
+            "Welcome",
+            self.firstname,
+            self.lastname,
+            "to the class of",
+            self.graduationyear,
+        )
 
 
 person2 = Student("Irina", "Ivanovna", 2015)
@@ -222,3 +227,130 @@ plane1 = Plane("Sukhoi", "Superjet")
 
 for x in (car1, boat1, plane1):
     x.move()
+
+import mymodule as mx
+
+mx.greeting("Ivan")
+moduleperson = mx.person1["age"]
+print(moduleperson)
+
+
+import platform
+
+system = platform.system()
+print(system)
+allFuncs = dir(platform)
+print(allFuncs)
+
+from mymodule import person1
+
+print(person1["age"])
+
+
+import datetime
+
+time = datetime.datetime.now()
+print(time.year)
+print(time.strftime("%A"))
+print(time.strftime("%B"))
+
+
+import json
+
+js = {
+    "name": "John",
+    "age": 30,
+    "married": True,
+    "divorced": False,
+    "children": ("Ann", "Billy"),
+    "pets": None,
+    "cars": [
+        {"model": "BMW 230", "mpg": 27.5},
+        {"model": "Ford Edge", "mpg": 24.1},
+    ],
+}
+
+print(json.dumps(js))
+print(json.dumps(js, indent=4))
+
+
+# some JSON:
+jsdata = '{ "name":"John", "age":30, "city":"New York"}'
+
+# parse
+parseJsdata = json.loads(jsdata)
+
+# the result is a Python dictionary:
+print(parseJsdata["age"])
+
+
+import re
+
+txt = "The rain in Spain"
+isTxt = re.search("^The.*Spain$", txt)
+
+if isTxt:
+    print("YES! We have a match!")
+else:
+    print("No match")
+
+
+try:
+    f = open("demofile.txt")
+    try:
+        f.write("Lorum Ipsum")
+    except:
+        print("Something went wrong when writing to the file")
+    finally:
+        f.close()
+except:
+    print("Something went wrong when opening the file")
+
+
+# username = input("Enter username:")
+# print("Username is: " + username)
+
+
+myorder = "I have a {carname}, it is a {model}.\n"
+print(myorder.format(carname="Ford", model="Mustang"))
+
+file = open("demofile.txt", "r")
+# print(file.read())
+# print(file.readline())
+
+for x in file:
+    print(x)
+
+file.close()
+
+
+file2 = open("demofile.txt", "a")
+file2.write("\nNow the file has more content!")
+file2.close()
+
+# open and read the file after the appending:
+file2 = open("demofile.txt", "r")
+print(file2.read())
+file2.close()
+
+file3 = open("myfile.txt", "x")
+file3.close()
+
+# import os
+
+# if os.path.exists("myfile.txt"):
+#     os.remove("myfile.txt")
+# else:
+#     print("The file does not exist")
+
+
+def backwards(string):
+    return string[::-1]
+
+
+print(backwards("Random String!"))
+
+
+removeDupes = ["a", "b", "a", "c", "c"]
+mylist = list(dict.fromkeys(removeDupes))
+print(mylist)
